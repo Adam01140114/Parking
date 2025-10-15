@@ -55,28 +55,28 @@
     </header>
 
     <!-- Main Content -->
-    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
+    <main class="max-w-4xl mx-auto px-3 sm:px-6 lg:px-8 py-2">
         <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
             <!-- Header Section -->
-            <div class="bg-gradient-to-r from-primary-600 to-primary-700 px-8 py-6">
+            <div class="bg-gradient-to-r from-primary-600 to-primary-700 px-4 sm:px-8 py-4 sm:py-6">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
-                        <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
-                            <i class="fas fa-car text-2xl text-white"></i>
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-car text-xl sm:text-2xl text-white"></i>
                         </div>
                     </div>
-                    <div class="ml-4">
-                        <h2 class="text-2xl font-bold text-white">Vehicle Registration</h2>
-                        <p class="text-primary-100">Please provide your vehicle and contact information</p>
+                    <div class="ml-3 sm:ml-4">
+                        <h2 class="text-lg sm:text-2xl font-bold text-white">Vehicle Registration</h2>
+                        <p class="text-primary-100 text-sm sm:text-base">Please provide your vehicle and contact information</p>
                     </div>
                 </div>
             </div>
 
             <!-- Form Section -->
-            <div class="p-8">
-                <form id="parkingForm" class="space-y-6">
+            <div class="p-4 sm:p-8">
+                <form id="parkingForm" class="space-y-4 sm:space-y-6">
                     <!-- Personal Information -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                         <div>
                             <label for="firstName" class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                                 <i class="fas fa-user mr-2 text-primary-600"></i>First Name *
@@ -98,7 +98,7 @@
                         <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-4 flex items-center">
                             <i class="fas fa-car mr-2 text-primary-600"></i>Vehicle Information
                         </h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                             <div>
                                 <label for="carYear" class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                                     Year *
@@ -149,13 +149,23 @@
                             </div>
                         </div>
                         
+                        <!-- Parking Space -->
+                        <div class="mt-4">
+                            <label for="parkingSpace" class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                                <i class="fas fa-parking mr-2 text-primary-600"></i>Parking Space Number *
+                            </label>
+                            <input type="text" id="parkingSpace" name="parkingSpace" required
+                                class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                                placeholder="e.g., A-15, B-23, etc.">
+                        </div>
+                        
                         <!-- Vehicle Photo Upload -->
                         <div class="mt-6">
                             <label for="carPhoto" class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
-                                <i class="fas fa-camera mr-2 text-primary-600"></i>Vehicle Photo *
+                                <i class="fas fa-camera mr-2 text-primary-600"></i>Vehicle Photo (Optional)
                             </label>
                             <div class="border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-xl p-6 text-center hover:border-primary-500 dark:hover:border-primary-400 transition-colors">
-                                <input type="file" id="carPhoto" name="carPhoto" accept="image/*" required class="hidden">
+                                <input type="file" id="carPhoto" name="carPhoto" accept="image/*" class="hidden">
                                 <div id="photoUploadArea" class="cursor-pointer">
                                     <i class="fas fa-cloud-upload-alt text-4xl text-slate-400 dark:text-slate-500 mb-4"></i>
                                     <p class="text-slate-600 dark:text-slate-400 mb-2">Click to upload a photo of your vehicle</p>
@@ -174,7 +184,7 @@
                         <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-4 flex items-center">
                             <i class="fas fa-phone mr-2 text-primary-600"></i>Contact Information
                         </h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                             <div>
                                 <label for="phoneNumber" class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                                     Phone Number *
@@ -198,14 +208,24 @@
                             <i class="fas fa-map-marker-alt mr-2 text-primary-600"></i>Address Information
                         </h3>
                         <div class="space-y-4">
-                            <div>
-                                <label for="street" class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
-                                    Street Address *
-                                </label>
-                                <input type="text" id="street" name="street" required
-                                    class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+                                <div>
+                                    <label for="street" class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                                        Street Address *
+                                    </label>
+                                    <input type="text" id="street" name="street" required
+                                        class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all">
+                                </div>
+                                <div>
+                                    <label for="unitNumber" class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                                        Unit #
+                                    </label>
+                                    <input type="text" id="unitNumber" name="unitNumber"
+                                        class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                                        placeholder="e.g., Apt 2B, Unit 15, etc.">
+                                </div>
                             </div>
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
                                 <div>
                                     <label for="city" class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                                         City *
@@ -292,7 +312,7 @@
                     <!-- Submit Button -->
                     <div class="border-t border-slate-200 dark:border-slate-700 pt-6">
                         <button type="submit" id="submitBtn"
-                            class="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-slate-800">
+                            class="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-semibold py-3 sm:py-4 px-4 sm:px-6 rounded-xl transition-all duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-slate-800 text-sm sm:text-base">
                             <i class="fas fa-parking mr-2"></i>
                             Register Vehicle
                         </button>
@@ -304,25 +324,25 @@
 
     <!-- Status Page (shown after registration) -->
     <div id="statusPage" class="hidden">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto px-3 sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
             <!-- Header Section -->
-            <div class="bg-gradient-to-r from-primary-600 to-primary-700 px-8 py-6">
+            <div class="bg-gradient-to-r from-primary-600 to-primary-700 px-4 sm:px-8 py-4 sm:py-6">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
-                        <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
-                            <i class="fas fa-car text-2xl text-white"></i>
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-car text-xl sm:text-2xl text-white"></i>
                         </div>
                     </div>
-                    <div class="ml-4">
-                        <h2 class="text-2xl font-bold text-white">Parking Status</h2>
-                        <p class="text-primary-100">Your current parking registration</p>
+                    <div class="ml-3 sm:ml-4">
+                        <h2 class="text-lg sm:text-2xl font-bold text-white">Parking Status</h2>
+                        <p class="text-primary-100 text-sm sm:text-base">Your current parking registration</p>
                     </div>
                 </div>
             </div>
 
             <!-- Status Content -->
-            <div class="p-8">
+            <div class="p-4 sm:p-8">
                 <!-- Status Badge -->
                 <div class="text-center mb-8">
                     <div id="statusBadge" class="inline-flex items-center px-6 py-3 rounded-full text-lg font-semibold">
@@ -332,9 +352,9 @@
                 </div>
 
                 <!-- User Info Display -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8 mb-6 sm:mb-8">
                     <!-- Personal Info -->
-                    <div class="bg-slate-50 dark:bg-slate-700 rounded-xl p-6">
+                    <div class="bg-slate-50 dark:bg-slate-700 rounded-xl p-4 sm:p-6">
                         <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-4 flex items-center">
                             <i class="fas fa-user mr-2 text-primary-600"></i>Personal Information
                         </h3>
@@ -355,7 +375,7 @@
                     </div>
 
                     <!-- Vehicle Info -->
-                    <div class="bg-slate-50 dark:bg-slate-700 rounded-xl p-6">
+                    <div class="bg-slate-50 dark:bg-slate-700 rounded-xl p-4 sm:p-6">
                         <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-4 flex items-center">
                             <i class="fas fa-car mr-2 text-primary-600"></i>Vehicle Information
                         </h3>
@@ -368,6 +388,10 @@
                                 <span class="text-sm font-medium text-slate-600 dark:text-slate-400">Color:</span>
                                 <span id="displayColor" class="ml-2 text-slate-900 dark:text-slate-100"></span>
                             </div>
+                            <div>
+                                <span class="text-sm font-medium text-slate-600 dark:text-slate-400">Parking Space:</span>
+                                <span id="displayParkingSpace" class="ml-2 text-slate-900 dark:text-slate-100 font-semibold"></span>
+                            </div>
                         </div>
                         <div class="mt-4">
                             <span class="text-sm font-medium text-slate-600 dark:text-slate-400 block mb-2">Vehicle Photo:</span>
@@ -377,7 +401,7 @@
                 </div>
 
                 <!-- Address Info -->
-                <div class="bg-slate-50 dark:bg-slate-700 rounded-xl p-6 mb-8">
+                <div class="bg-slate-50 dark:bg-slate-700 rounded-xl p-4 sm:p-6 mb-6 sm:mb-8">
                     <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-4 flex items-center">
                         <i class="fas fa-map-marker-alt mr-2 text-primary-600"></i>Address
                     </h3>
@@ -385,7 +409,7 @@
                 </div>
 
                 <!-- Registration Time -->
-                <div class="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6 mb-8">
+                <div class="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-4 sm:p-6 mb-6 sm:mb-8">
                     <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-2 flex items-center">
                         <i class="fas fa-clock mr-2 text-blue-600"></i>Registration Details
                     </h3>
@@ -396,12 +420,12 @@
                 </div>
 
                 <!-- Action Buttons -->
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button id="leaveBtn" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-8 rounded-xl transition-all duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-slate-800">
+                <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+                    <button id="leaveBtn" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 sm:px-8 rounded-xl transition-all duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-slate-800 text-sm sm:text-base">
                         <i class="fas fa-sign-out-alt mr-2"></i>
                         Leave Parking Lot
                     </button>
-                    <button id="resubmitBtn" class="bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-3 px-8 rounded-xl transition-all duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 dark:focus:ring-offset-slate-800">
+                    <button id="resubmitBtn" class="bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-3 px-6 sm:px-8 rounded-xl transition-all duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 dark:focus:ring-offset-slate-800 text-sm sm:text-base">
                         <i class="fas fa-edit mr-2"></i>
                         Resubmit Information
                     </button>
@@ -537,8 +561,38 @@
                         const docSnap = await getDoc(docRef);
                         
                         if (docSnap.exists()) {
-                            console.log('Registration verified in database, showing status page');
-                            showStatusPage(existingData);
+                            const dbData = docSnap.data();
+                            console.log('Database data:', dbData);
+                            
+                            // Compare localStorage data with database data
+                            const hasChanges = compareRegistrationData(existingData, dbData);
+                            
+                            if (hasChanges) {
+                                console.log('Changes detected in database, updating localStorage...');
+                                // Update localStorage with fresh data from database
+                                const updatedData = {
+                                    ...existingData,
+                                    firstName: dbData.firstName,
+                                    lastName: dbData.lastName,
+                                    carYear: dbData.carYear,
+                                    carMake: dbData.carMake,
+                                    carModel: dbData.carModel,
+                                    carColor: dbData.carColor,
+                                    parkingSpace: dbData.parkingSpace,
+                                    phoneNumber: dbData.phoneNumber,
+                                    email: dbData.email,
+                                    address: dbData.address,
+                                    status: dbData.status,
+                                    carPhotoUrl: dbData.carPhotoUrl
+                                };
+                                
+                                setLocalStorage('parkingRegistration', updatedData);
+                                console.log('localStorage updated with fresh data from database');
+                                showStatusPage(updatedData);
+                            } else {
+                                console.log('No changes detected, showing status page with existing data');
+                                showStatusPage(existingData);
+                            }
                         } else {
                             console.log('Registration not found in database, cleaning up localStorage');
                             deleteLocalStorage('parkingRegistration');
@@ -562,6 +616,41 @@
             }
         }
 
+        // ----- Compare registration data -----
+        function compareRegistrationData(localData, dbData) {
+            // Compare all relevant fields
+            const fieldsToCompare = [
+                'firstName', 'lastName', 'carYear', 'carMake', 'carModel', 
+                'carColor', 'parkingSpace', 'phoneNumber', 'email', 'status'
+            ];
+            
+            for (const field of fieldsToCompare) {
+                if (localData[field] !== dbData[field]) {
+                    console.log(`Field '${field}' changed:`, localData[field], '->', dbData[field]);
+                    return true;
+                }
+            }
+            
+            // Compare address object
+            if (localData.address) {
+                const addressFields = ['street', 'unitNumber', 'city', 'state', 'zip'];
+                for (const field of addressFields) {
+                    if (localData.address[field] !== dbData.address[field]) {
+                        console.log(`Address field '${field}' changed:`, localData.address[field], '->', dbData.address[field]);
+                        return true;
+                    }
+                }
+            }
+            
+            // Compare car photo URL
+            if (localData.carPhotoUrl !== dbData.carPhotoUrl) {
+                console.log('Car photo URL changed:', localData.carPhotoUrl, '->', dbData.carPhotoUrl);
+                return true;
+            }
+            
+            return false;
+        }
+
         // ----- Show Status Page -----
         function showStatusPage(data) {
             // Hide form, show status page
@@ -574,7 +663,15 @@
             document.getElementById('displayEmail').textContent = data.email || 'Not provided';
             document.getElementById('displayVehicle').textContent = `${data.carYear} ${data.carMake} ${data.carModel}`;
             document.getElementById('displayColor').textContent = data.carColor;
-            document.getElementById('displayAddress').textContent = `${data.address.street}, ${data.address.city}, ${data.address.state} ${data.address.zip}`;
+            document.getElementById('displayParkingSpace').textContent = data.parkingSpace;
+            
+            // Build address string with unit number if provided
+            let addressString = data.address.street;
+            if (data.address.unitNumber) {
+                addressString += `, ${data.address.unitNumber}`;
+            }
+            addressString += `, ${data.address.city}, ${data.address.state} ${data.address.zip}`;
+            document.getElementById('displayAddress').textContent = addressString;
             
             // Display car photo
             if (data.carPhotoUrl) {
@@ -694,10 +791,12 @@
                     carMake: formData.get('carMake'),
                     carModel: formData.get('carModel'),
                     carColor: formData.get('carColor'),
+                    parkingSpace: formData.get('parkingSpace'),
                     phoneNumber: formData.get('phoneNumber'),
                     email: formData.get('email') || '',
                     address: {
                         street: formData.get('street'),
+                        unitNumber: formData.get('unitNumber') || '',
                         city: formData.get('city'),
                         state: formData.get('state').toUpperCase(),
                         zip: formData.get('zip')
@@ -714,6 +813,7 @@
                     carMake: data.carMake,
                     carModel: data.carModel,
                     carColor: data.carColor,
+                    parkingSpace: data.parkingSpace,
                     phoneNumber: data.phoneNumber,
                     email: data.email,
                     address: data.address,
@@ -795,9 +895,11 @@
                 document.getElementById('carMake').value = existingData.carMake;
                 document.getElementById('carModel').value = existingData.carModel;
                 document.getElementById('carColor').value = existingData.carColor;
+                document.getElementById('parkingSpace').value = existingData.parkingSpace || '';
                 document.getElementById('phoneNumber').value = existingData.phoneNumber;
                 document.getElementById('email').value = existingData.email || '';
                 document.getElementById('street').value = existingData.address.street;
+                document.getElementById('unitNumber').value = existingData.address.unitNumber || '';
                 document.getElementById('city').value = existingData.address.city;
                 document.getElementById('state').value = existingData.address.state;
                 document.getElementById('zip').value = existingData.address.zip;
