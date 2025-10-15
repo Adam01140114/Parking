@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Portal - Sign In</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white dark:bg-slate-800 shadow-lg border-b border-slate-200 dark:border-slate-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-parking text-3xl text-primary-600 dark:text-primary-400"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h1 class="text-2xl font-bold text-slate-800 dark:text-slate-200">Parking Portal</h1>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">Secure Parking Management</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="themeToggle" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:inline"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+            <!-- Header Section -->
+            <div class="bg-gradient-to-r from-primary-600 to-primary-700 px-8 py-6">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-car text-2xl text-white"></i>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <h2 class="text-2xl font-bold text-white">Vehicle Registration</h2>
+                        <p class="text-primary-100">Please provide your vehicle and contact information</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Section -->
+            <div class="p-8">
+                <form id="parkingForm" class="space-y-6">
+                    <!-- Personal Information -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="firstName" class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                                <i class="fas fa-user mr-2 text-primary-600"></i>First Name *
+                            </label>
+                            <input type="text" id="firstName" name="firstName" required
+                                class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all">
+                        </div>
+                        <div>
+                            <label for="lastName" class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                                <i class="fas fa-user mr-2 text-primary-600"></i>Last Name *
+                            </label>
+                            <input type="text" id="lastName" name="lastName" required
+                                class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all">
+                        </div>
+                    </div>
+
+                    <!-- Vehicle Information -->
+                    <div class="border-t border-slate-200 dark:border-slate-700 pt-6">
+                        <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-4 flex items-center">
+                            <i class="fas fa-car mr-2 text-primary-600"></i>Vehicle Information
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div>
+                                <label for="carYear" class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                                    Year *
+                                </label>
+                                <input type="number" id="carYear" name="carYear" min="1900" max="2030" required
+                                    class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all">
+                            </div>
+                            <div>
+                                <label for="carMake" class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                                    Make *
+                                </label>
+                                <input type="text" id="carMake" name="carMake" required
+                                    class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all">
+                            </div>
+                            <div>
+                                <label for="carModel" class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                                    Model *
+                                </label>
+                                <input type="text" id="carModel" name="carModel" required
+                                    class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all">
+                            </div>
+                            <div class="md:col-span-2 lg:col-span-3">
+                                <label for="carColor" class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                                    Color *
+                                </label>
+                                <select id="carColor" name="carColor" required
+                                    class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all">
+                                    <option value="">Select a color</option>
+                                    <option value="White">White</option>
+                                    <option value="Black">Black</option>
+                                    <option value="Silver">Silver</option>
+                                    <option value="Gray">Gray</option>
+                                    <option value="Red">Red</option>
+                                    <option value="Blue">Blue</option>
+                                    <option value="Green">Green</option>
+                                    <option value="Yellow">Yellow</option>
+                                    <option value="Orange">Orange</option>
+                                    <option value="Brown">Brown</option>
+                                    <option value="Gold">Gold</option>
+                                    <option value="Purple">Purple</option>
+                                    <option value="Pink">Pink</option>
+                                    <option value="Beige">Beige</option>
+                                    <option value="Maroon">Maroon</option>
+                                    <option value="Navy">Navy</option>
+                                    <option value="Teal">Teal</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- Vehicle Photo Upload -->
+                        <div class="mt-6">
+                            <label for="carPhoto" class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                                <i class="fas fa-camera mr-2 text-primary-600"></i>Vehicle Photo *
+                            </label>
+                            <div class="border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-xl p-6 text-center hover:border-primary-500 dark:hover:border-primary-400 transition-colors">
+                                <input type="file" id="carPhoto" name="carPhoto" accept="image/*" required class="hidden">
+                                <div id="photoUploadArea" class="cursor-pointer">
+                                    <i class="fas fa-cloud-upload-alt text-4xl text-slate-400 dark:text-slate-500 mb-4"></i>
+                                    <p class="text-slate-600 dark:text-slate-400 mb-2">Click to upload a photo of your vehicle</p>
+                                    <p class="text-sm text-slate-500 dark:text-slate-500">PNG, JPG, JPEG up to 5MB</p>
+                                </div>
+                                <div id="photoPreview" class="hidden">
+                                    <img id="previewImage" class="max-w-full h-48 object-cover rounded-lg mx-auto mb-2">
+                                    <p class="text-sm text-slate-600 dark:text-slate-400">Click to change photo</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div class="border-t border-slate-200 dark:border-slate-700 pt-6">
+                        <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-4 flex items-center">
+                            <i class="fas fa-phone mr-2 text-primary-600"></i>Contact Information
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="phoneNumber" class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                                    Phone Number *
+                                </label>
+                                <input type="tel" id="phoneNumber" name="phoneNumber" required
+                                    class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                                    Email Address
+                                </label>
+                                <input type="email" id="email" name="email"
+                                    class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Address Information -->
+                    <div class="border-t border-slate-200 dark:border-slate-700 pt-6">
+                        <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-4 flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-primary-600"></i>Address Information
+                        </h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label for="street" class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                                    Street Address *
+                                </label>
+                                <input type="text" id="street" name="street" required
+                                    class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all">
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div>
+                                    <label for="city" class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                                        City *
+                                    </label>
+                                    <input type="text" id="city" name="city" required
+                                        class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all">
+                                </div>
+                                <div>
+                                    <label for="state" class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                                        State *
+                                    </label>
+                                    <select id="state" name="state" required
+                                        class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all">
+                                        <option value="">Select a state</option>
+                                        <option value="AL">Alabama</option>
+                                        <option value="AK">Alaska</option>
+                                        <option value="AZ">Arizona</option>
+                                        <option value="AR">Arkansas</option>
+                                        <option value="CA">California</option>
+                                        <option value="CO">Colorado</option>
+                                        <option value="CT">Connecticut</option>
+                                        <option value="DE">Delaware</option>
+                                        <option value="FL">Florida</option>
+                                        <option value="GA">Georgia</option>
+                                        <option value="HI">Hawaii</option>
+                                        <option value="ID">Idaho</option>
+                                        <option value="IL">Illinois</option>
+                                        <option value="IN">Indiana</option>
+                                        <option value="IA">Iowa</option>
+                                        <option value="KS">Kansas</option>
+                                        <option value="KY">Kentucky</option>
+                                        <option value="LA">Louisiana</option>
+                                        <option value="ME">Maine</option>
+                                        <option value="MD">Maryland</option>
+                                        <option value="MA">Massachusetts</option>
+                                        <option value="MI">Michigan</option>
+                                        <option value="MN">Minnesota</option>
+                                        <option value="MS">Mississippi</option>
+                                        <option value="MO">Missouri</option>
+                                        <option value="MT">Montana</option>
+                                        <option value="NE">Nebraska</option>
+                                        <option value="NV">Nevada</option>
+                                        <option value="NH">New Hampshire</option>
+                                        <option value="NJ">New Jersey</option>
+                                        <option value="NM">New Mexico</option>
+                                        <option value="NY">New York</option>
+                                        <option value="NC">North Carolina</option>
+                                        <option value="ND">North Dakota</option>
+                                        <option value="OH">Ohio</option>
+                                        <option value="OK">Oklahoma</option>
+                                        <option value="OR">Oregon</option>
+                                        <option value="PA">Pennsylvania</option>
+                                        <option value="RI">Rhode Island</option>
+                                        <option value="SC">South Carolina</option>
+                                        <option value="SD">South Dakota</option>
+                                        <option value="TN">Tennessee</option>
+                                        <option value="TX">Texas</option>
+                                        <option value="UT">Utah</option>
+                                        <option value="VT">Vermont</option>
+                                        <option value="VA">Virginia</option>
+                                        <option value="WA">Washington</option>
+                                        <option value="WV">West Virginia</option>
+                                        <option value="WI">Wisconsin</option>
+                                        <option value="WY">Wyoming</option>
+                                        <option value="DC">District of Columbia</option>
+                                        <option value="AS">American Samoa</option>
+                                        <option value="GU">Guam</option>
+                                        <option value="MP">Northern Mariana Islands</option>
+                                        <option value="PR">Puerto Rico</option>
+                                        <option value="VI">U.S. Virgin Islands</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="zip" class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                                        ZIP Code *
+                                    </label>
+                                    <input type="text" id="zip" name="zip" required pattern="[0-9]{5}(-[0-9]{4})?"
+                                        class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="border-t border-slate-200 dark:border-slate-700 pt-6">
+                        <button type="submit" id="submitBtn"
+                            class="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-slate-800">
+                            <i class="fas fa-parking mr-2"></i>
+                            Register Vehicle
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Status Page (shown after registration) -->
+    <div id="statusPage" class="hidden">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+            <!-- Header Section -->
+            <div class="bg-gradient-to-r from-primary-600 to-primary-700 px-8 py-6">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-car text-2xl text-white"></i>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <h2 class="text-2xl font-bold text-white">Parking Status</h2>
+                        <p class="text-primary-100">Your current parking registration</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Status Content -->
+            <div class="p-8">
+                <!-- Status Badge -->
+                <div class="text-center mb-8">
+                    <div id="statusBadge" class="inline-flex items-center px-6 py-3 rounded-full text-lg font-semibold">
+                        <i class="fas fa-check-circle mr-2"></i>
+                        <span>Active</span>
+                    </div>
+                </div>
+
+                <!-- User Info Display -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    <!-- Personal Info -->
+                    <div class="bg-slate-50 dark:bg-slate-700 rounded-xl p-6">
+                        <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-4 flex items-center">
+                            <i class="fas fa-user mr-2 text-primary-600"></i>Personal Information
+                        </h3>
+                        <div class="space-y-3">
+                            <div>
+                                <span class="text-sm font-medium text-slate-600 dark:text-slate-400">Name:</span>
+                                <span id="displayName" class="ml-2 text-slate-900 dark:text-slate-100 font-semibold"></span>
+                            </div>
+                            <div>
+                                <span class="text-sm font-medium text-slate-600 dark:text-slate-400">Phone:</span>
+                                <span id="displayPhone" class="ml-2 text-slate-900 dark:text-slate-100"></span>
+                            </div>
+                            <div>
+                                <span class="text-sm font-medium text-slate-600 dark:text-slate-400">Email:</span>
+                                <span id="displayEmail" class="ml-2 text-slate-900 dark:text-slate-100"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vehicle Info -->
+                    <div class="bg-slate-50 dark:bg-slate-700 rounded-xl p-6">
+                        <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-4 flex items-center">
+                            <i class="fas fa-car mr-2 text-primary-600"></i>Vehicle Information
+                        </h3>
+                        <div class="space-y-3">
+                            <div>
+                                <span class="text-sm font-medium text-slate-600 dark:text-slate-400">Vehicle:</span>
+                                <span id="displayVehicle" class="ml-2 text-slate-900 dark:text-slate-100 font-semibold"></span>
+                            </div>
+                            <div>
+                                <span class="text-sm font-medium text-slate-600 dark:text-slate-400">Color:</span>
+                                <span id="displayColor" class="ml-2 text-slate-900 dark:text-slate-100"></span>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <span class="text-sm font-medium text-slate-600 dark:text-slate-400 block mb-2">Vehicle Photo:</span>
+                            <img id="displayCarPhoto" class="w-full h-32 object-cover rounded-lg border border-slate-200 dark:border-slate-600" alt="Vehicle Photo">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Address Info -->
+                <div class="bg-slate-50 dark:bg-slate-700 rounded-xl p-6 mb-8">
+                    <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-4 flex items-center">
+                        <i class="fas fa-map-marker-alt mr-2 text-primary-600"></i>Address
+                    </h3>
+                    <div id="displayAddress" class="text-slate-900 dark:text-slate-100"></div>
+                </div>
+
+                <!-- Registration Time -->
+                <div class="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6 mb-8">
+                    <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-2 flex items-center">
+                        <i class="fas fa-clock mr-2 text-blue-600"></i>Registration Details
+                    </h3>
+                    <div class="text-slate-600 dark:text-slate-400">
+                        <div>Registered on: <span id="displayDate" class="font-semibold text-slate-900 dark:text-slate-100"></span></div>
+                        <div>Time: <span id="displayTime" class="font-semibold text-slate-900 dark:text-slate-100"></span></div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button id="leaveBtn" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-8 rounded-xl transition-all duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-slate-800">
+                        <i class="fas fa-sign-out-alt mr-2"></i>
+                        Leave Parking Lot
+                    </button>
+                    <button id="resubmitBtn" class="bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-3 px-8 rounded-xl transition-all duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 dark:focus:ring-offset-slate-800">
+                        <i class="fas fa-edit mr-2"></i>
+                        Resubmit Information
+                    </button>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- Leave Confirmation Modal -->
+    <div id="leaveModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl">
+            <div class="text-center">
+                <div class="w-16 h-16 bg-red-100 dark:bg-red-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-sign-out-alt text-2xl text-red-600 dark:text-red-400"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-800 dark:text-slate-200 mb-2">Leave Parking Lot</h3>
+                <p class="text-slate-600 dark:text-slate-400 mb-6">Are you sure you want to leave? This will remove your parking registration.</p>
+                <div class="flex justify-center space-x-3">
+                    <button id="cancelLeave" class="px-4 py-2 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+                        Cancel
+                    </button>
+                    <button id="confirmLeave" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-colors">
+                        Yes, Leave
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase (modular SDK via ESM) -->
+    <script type="module">
+        // ----- Firebase Setup -----
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+        import {
+            getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, serverTimestamp, query, where, getDocs, getDoc
+        } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+        import {
+            getStorage, ref, uploadBytes, getDownloadURL, deleteObject
+        } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-storage.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyD7Ts3Mu2VUR4Jd21MXkRpK5mMMuMbotLc",
+            authDomain: "parking-2c684.firebaseapp.com",
+            projectId: "parking-2c684",
+            storageBucket: "parking-2c684.firebasestorage.app",
+            messagingSenderId: "308988972943",
+            appId: "1:308988972943:web:0fd6ab3e3d760ec57bc5fa",
+            measurementId: "G-C0Y5E90LTV"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const storage = getStorage(app);
+        const parkingRef = collection(db, "parking_registrations");
+
+        // ----- Theme Toggle -----
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+
+        // Check for saved theme preference or default to light mode
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        html.classList.toggle('dark', currentTheme === 'dark');
+
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            const newTheme = html.classList.contains('dark') ? 'dark' : 'light';
+            localStorage.setItem('theme', newTheme);
+        });
+
+        // ----- Element References -----
+        const parkingForm = document.getElementById('parkingForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const statusPage = document.getElementById('statusPage');
+        const leaveModal = document.getElementById('leaveModal');
+        const leaveBtn = document.getElementById('leaveBtn');
+        const resubmitBtn = document.getElementById('resubmitBtn');
+        const cancelLeave = document.getElementById('cancelLeave');
+        const confirmLeave = document.getElementById('confirmLeave');
+
+        // ----- Local Storage Functions -----
+        function setLocalStorage(name, value) {
+            try {
+                const jsonString = JSON.stringify(value);
+                console.log('Attempting to save to localStorage:', name, 'Data:', jsonString);
+                localStorage.setItem(name, jsonString);
+                console.log('Data saved to localStorage successfully:', name);
+                
+                // Verify it was saved
+                const saved = localStorage.getItem(name);
+                console.log('Verification - retrieved from localStorage:', saved);
+            } catch (e) {
+                console.error('Error saving to localStorage:', e);
+            }
+        }
+
+        function getLocalStorage(name) {
+            try {
+                console.log('Attempting to read from localStorage:', name);
+                const data = localStorage.getItem(name);
+                console.log('Raw data from localStorage:', data);
+                const parsed = data ? JSON.parse(data) : null;
+                console.log('Parsed data from localStorage:', parsed);
+                return parsed;
+            } catch (e) {
+                console.error('Error reading from localStorage:', e);
+                return null;
+            }
+        }
+
+        function deleteLocalStorage(name) {
+            try {
+                localStorage.removeItem(name);
+                console.log('Data removed from localStorage:', name);
+            } catch (e) {
+                console.error('Error removing from localStorage:', e);
+            }
+        }
+
+        // ----- Check for existing registration -----
+        async function checkExistingRegistration() {
+            console.log('Checking for existing registration...');
+            const existingData = getLocalStorage('parkingRegistration');
+            console.log('Existing data:', existingData);
+            
+            if (existingData) {
+                console.log('Found existing registration in localStorage, verifying with database...');
+                
+                try {
+                    // Check if the document still exists in Firebase
+                    if (existingData.docId) {
+                        const docRef = doc(db, 'parking_registrations', existingData.docId);
+                        const docSnap = await getDoc(docRef);
+                        
+                        if (docSnap.exists()) {
+                            console.log('Registration verified in database, showing status page');
+                            showStatusPage(existingData);
+                        } else {
+                            console.log('Registration not found in database, cleaning up localStorage');
+                            deleteLocalStorage('parkingRegistration');
+                            console.log('localStorage cleaned, reloading page...');
+                            window.location.reload();
+                        }
+                    } else {
+                        console.log('No docId found, cleaning up localStorage');
+                        deleteLocalStorage('parkingRegistration');
+                        console.log('localStorage cleaned, reloading page...');
+                        window.location.reload();
+                    }
+                } catch (error) {
+                    console.error('Error verifying registration with database:', error);
+                    // If there's an error checking the database, show the status page anyway
+                    console.log('Database check failed, showing status page anyway');
+                    showStatusPage(existingData);
+                }
+            } else {
+                console.log('No existing registration found, showing form');
+            }
+        }
+
+        // ----- Show Status Page -----
+        function showStatusPage(data) {
+            // Hide form, show status page
+            document.querySelector('main > div').classList.add('hidden');
+            statusPage.classList.remove('hidden');
+
+            // Populate status page with data
+            document.getElementById('displayName').textContent = `${data.firstName} ${data.lastName}`;
+            document.getElementById('displayPhone').textContent = data.phoneNumber;
+            document.getElementById('displayEmail').textContent = data.email || 'Not provided';
+            document.getElementById('displayVehicle').textContent = `${data.carYear} ${data.carMake} ${data.carModel}`;
+            document.getElementById('displayColor').textContent = data.carColor;
+            document.getElementById('displayAddress').textContent = `${data.address.street}, ${data.address.city}, ${data.address.state} ${data.address.zip}`;
+            
+            // Display car photo
+            if (data.carPhotoUrl) {
+                document.getElementById('displayCarPhoto').src = data.carPhotoUrl;
+            }
+            
+            const regDate = new Date(data.timestamp);
+            document.getElementById('displayDate').textContent = regDate.toLocaleDateString();
+            document.getElementById('displayTime').textContent = regDate.toLocaleTimeString();
+
+            // Update status badge
+            const statusBadge = document.getElementById('statusBadge');
+            if (data.status === 'active') {
+                statusBadge.className = 'inline-flex items-center px-6 py-3 rounded-full text-lg font-semibold bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200';
+                statusBadge.innerHTML = '<i class="fas fa-check-circle mr-2"></i><span>Active</span>';
+            } else {
+                statusBadge.className = 'inline-flex items-center px-6 py-3 rounded-full text-lg font-semibold bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200';
+                statusBadge.innerHTML = '<i class="fas fa-times-circle mr-2"></i><span>Inactive</span>';
+            }
+        }
+
+        // ----- Show Form -----
+        function showForm() {
+            statusPage.classList.add('hidden');
+            document.querySelector('main > div').classList.remove('hidden');
+        }
+
+        // ----- Photo Upload Functions -----
+        function setupPhotoUpload() {
+            const photoInput = document.getElementById('carPhoto');
+            const photoUploadArea = document.getElementById('photoUploadArea');
+            const photoPreview = document.getElementById('photoPreview');
+            const previewImage = document.getElementById('previewImage');
+
+            photoUploadArea.addEventListener('click', () => photoInput.click());
+            photoPreview.addEventListener('click', () => photoInput.click());
+
+            photoInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    // Validate file size (5MB max)
+                    if (file.size > 5 * 1024 * 1024) {
+                        alert('File size must be less than 5MB');
+                        return;
+                    }
+
+                    // Show preview
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        previewImage.src = e.target.result;
+                        photoUploadArea.classList.add('hidden');
+                        photoPreview.classList.remove('hidden');
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        async function uploadCarPhoto(file, docId) {
+            if (!file) return null;
+            
+            const fileName = `car_photos/${docId}_${Date.now()}.${file.name.split('.').pop()}`;
+            const storageRef = ref(storage, fileName);
+            await uploadBytes(storageRef, file);
+            return await getDownloadURL(storageRef);
+        }
+
+        async function checkAndDeleteDuplicates(firstName, lastName, address) {
+            try {
+                // Query for documents with matching first name, last name, and address
+                const q = query(
+                    parkingRef,
+                    where('firstName', '==', firstName),
+                    where('lastName', '==', lastName),
+                    where('address.street', '==', address.street),
+                    where('address.city', '==', address.city),
+                    where('address.state', '==', address.state),
+                    where('address.zip', '==', address.zip)
+                );
+
+                const querySnapshot = await getDocs(q);
+                const duplicateIds = [];
+
+                querySnapshot.forEach((doc) => {
+                    duplicateIds.push(doc.id);
+                });
+
+                // Delete all duplicate documents
+                for (const duplicateId of duplicateIds) {
+                    await deleteDoc(doc(db, 'parking_registrations', duplicateId));
+                    console.log(`Deleted duplicate registration: ${duplicateId}`);
+                }
+
+                return duplicateIds.length > 0;
+            } catch (error) {
+                console.error('Error checking for duplicates:', error);
+                return false;
+            }
+        }
+
+        parkingForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Disable submit button and show loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Registering...';
+
+            try {
+                // Get form data
+                const formData = new FormData(parkingForm);
+                const carPhotoFile = formData.get('carPhoto');
+                
+                const data = {
+                    firstName: formData.get('firstName'),
+                    lastName: formData.get('lastName'),
+                    carYear: parseInt(formData.get('carYear')),
+                    carMake: formData.get('carMake'),
+                    carModel: formData.get('carModel'),
+                    carColor: formData.get('carColor'),
+                    phoneNumber: formData.get('phoneNumber'),
+                    email: formData.get('email') || '',
+                    address: {
+                        street: formData.get('street'),
+                        city: formData.get('city'),
+                        state: formData.get('state').toUpperCase(),
+                        zip: formData.get('zip')
+                    },
+                    timestamp: serverTimestamp(),
+                    status: 'active'
+                };
+
+                // Create a copy for cookie storage (without serverTimestamp)
+                const cookieData = {
+                    firstName: data.firstName,
+                    lastName: data.lastName,
+                    carYear: data.carYear,
+                    carMake: data.carMake,
+                    carModel: data.carModel,
+                    carColor: data.carColor,
+                    phoneNumber: data.phoneNumber,
+                    email: data.email,
+                    address: data.address,
+                    status: data.status,
+                    timestamp: new Date().toISOString()
+                };
+
+                // Check for and delete duplicates based on name and address
+                const hasDuplicates = await checkAndDeleteDuplicates(data.firstName, data.lastName, data.address);
+                if (hasDuplicates) {
+                    console.log('Found and deleted duplicate registrations');
+                }
+
+                // Check if this is an update (resubmit) or new registration
+                const existingData = getLocalStorage('parkingRegistration');
+                let docId;
+
+                if (existingData && existingData.docId) {
+                    // Update existing record
+                    docId = existingData.docId;
+                    
+                    // Upload new photo if provided
+                    if (carPhotoFile && carPhotoFile.size > 0) {
+                        data.carPhotoUrl = await uploadCarPhoto(carPhotoFile, docId);
+                    } else {
+                        // Keep existing photo URL
+                        data.carPhotoUrl = existingData.carPhotoUrl;
+                    }
+                    
+                    const docRef = doc(db, 'parking_registrations', docId);
+                    await updateDoc(docRef, data);
+                } else {
+                    // Create new record
+                    const docRef = await addDoc(parkingRef, data);
+                    docId = docRef.id;
+                    
+                    // Upload photo for new registration
+                    if (carPhotoFile && carPhotoFile.size > 0) {
+                        data.carPhotoUrl = await uploadCarPhoto(carPhotoFile, docId);
+                        // Update the document with photo URL
+                        await updateDoc(docRef, { carPhotoUrl: data.carPhotoUrl });
+                    }
+                }
+
+                // Save to cookie with document ID
+                cookieData.docId = docId;
+                if (data.carPhotoUrl) {
+                    cookieData.carPhotoUrl = data.carPhotoUrl;
+                }
+                console.log('Saving to localStorage:', cookieData);
+                setLocalStorage('parkingRegistration', cookieData);
+                console.log('Data saved successfully');
+
+                // Show status page
+                showStatusPage(cookieData);
+
+            } catch (error) {
+                console.error('Error registering vehicle:', error);
+                alert('Failed to register vehicle. Please try again.');
+            } finally {
+                // Re-enable submit button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-parking mr-2"></i>Register Vehicle';
+            }
+        });
+
+        // ----- Event Listeners for Status Page -----
+        leaveBtn.addEventListener('click', () => {
+            leaveModal.classList.remove('hidden');
+        });
+
+        resubmitBtn.addEventListener('click', () => {
+            // Pre-fill form with existing data
+            const existingData = getLocalStorage('parkingRegistration');
+            if (existingData) {
+                document.getElementById('firstName').value = existingData.firstName;
+                document.getElementById('lastName').value = existingData.lastName;
+                document.getElementById('carYear').value = existingData.carYear;
+                document.getElementById('carMake').value = existingData.carMake;
+                document.getElementById('carModel').value = existingData.carModel;
+                document.getElementById('carColor').value = existingData.carColor;
+                document.getElementById('phoneNumber').value = existingData.phoneNumber;
+                document.getElementById('email').value = existingData.email || '';
+                document.getElementById('street').value = existingData.address.street;
+                document.getElementById('city').value = existingData.address.city;
+                document.getElementById('state').value = existingData.address.state;
+                document.getElementById('zip').value = existingData.address.zip;
+                
+                // Reset photo upload area
+                document.getElementById('photoUploadArea').classList.remove('hidden');
+                document.getElementById('photoPreview').classList.add('hidden');
+                document.getElementById('carPhoto').value = '';
+            }
+            showForm();
+        });
+
+        cancelLeave.addEventListener('click', () => {
+            leaveModal.classList.add('hidden');
+        });
+
+        confirmLeave.addEventListener('click', async () => {
+            try {
+                // Delete from Firebase if document ID exists
+                const existingData = getLocalStorage('parkingRegistration');
+                if (existingData && existingData.docId) {
+                    await deleteDoc(doc(db, 'parking_registrations', existingData.docId));
+                }
+                
+                // Delete localStorage and show form
+                deleteLocalStorage('parkingRegistration');
+                leaveModal.classList.add('hidden');
+                showForm();
+            } catch (error) {
+                console.error('Error deleting registration:', error);
+                alert('Failed to delete registration. Please try again.');
+            }
+        });
+
+        // Close leave modal when clicking outside
+        leaveModal.addEventListener('click', (e) => {
+            if (e.target === leaveModal) {
+                leaveModal.classList.add('hidden');
+            }
+        });
+
+        // Phone number formatting
+        const phoneInput = document.getElementById('phoneNumber');
+        phoneInput.addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 6) {
+                value = value.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+            } else if (value.length >= 3) {
+                value = value.replace(/(\d{3})(\d{0,3})/, '($1) $2');
+            }
+            e.target.value = value;
+        });
+
+        // ZIP code formatting
+        const zipInput = document.getElementById('zip');
+        zipInput.addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 5) {
+                value = value.substring(0, 5) + '-' + value.substring(5, 9);
+            }
+            e.target.value = value;
+        });
+
+        // ----- Keyboard Shortcuts -----
+        document.addEventListener('keydown', (e) => {
+            // Ctrl+Shift to go to admin page
+            if (e.ctrlKey && e.shiftKey) {
+                e.preventDefault();
+                window.location.href = 'parkingadmin.html';
+            }
+        });
+
+        // ----- Initialize -----
+        setupPhotoUpload();
+        
+        // Test localStorage functionality
+        console.log('Testing localStorage...');
+        try {
+            localStorage.setItem('test', 'working');
+            const testValue = localStorage.getItem('test');
+            console.log('localStorage test result:', testValue);
+            localStorage.removeItem('test');
+        } catch (e) {
+            console.error('localStorage test failed:', e);
+        }
+        
+        checkExistingRegistration();
+    </script>
+</body>
+</html>

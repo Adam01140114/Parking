@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Admin - Management Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white dark:bg-slate-800 shadow-lg border-b border-slate-200 dark:border-slate-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-parking text-3xl text-primary-600 dark:text-primary-400"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h1 class="text-2xl font-bold text-slate-800 dark:text-slate-200">Parking Admin Portal</h1>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">Manage Vehicle Registrations</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="text-sm text-slate-600 dark:text-slate-400">
+                        <span id="totalRegistrations" class="font-semibold">0</span> Total Registrations
+                    </div>
+                    <button id="themeToggle" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:inline"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 p-6">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-car text-xl text-blue-600 dark:text-blue-400"></i>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-slate-600 dark:text-slate-400">Total Vehicles</p>
+                        <p class="text-2xl font-bold text-slate-900 dark:text-slate-100" id="totalVehicles">0</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 p-6">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-check-circle text-xl text-green-600 dark:text-green-400"></i>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-slate-600 dark:text-slate-400">Active</p>
+                        <p class="text-2xl font-bold text-slate-900 dark:text-slate-100" id="activeVehicles">0</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 p-6">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-yellow-100 dark:bg-yellow-900 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-clock text-xl text-yellow-600 dark:text-yellow-400"></i>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-slate-600 dark:text-slate-400">Today</p>
+                        <p class="text-2xl font-bold text-slate-900 dark:text-slate-100" id="todayRegistrations">0</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 p-6">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-calendar text-xl text-purple-600 dark:text-purple-400"></i>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-slate-600 dark:text-slate-400">This Month</p>
+                        <p class="text-2xl font-bold text-slate-900 dark:text-slate-100" id="monthRegistrations">0</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 p-6 mb-8">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <input type="text" id="searchInput" placeholder="Search vehicles..." 
+                            class="pl-10 pr-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                        <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400"></i>
+                    </div>
+                    <select id="statusFilter" class="px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                        <option value="">All Status</option>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button id="refreshBtn" class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg transition-colors">
+                        <i class="fas fa-sync-alt mr-2"></i>Refresh
+                    </button>
+                    <button id="exportBtn" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors">
+                        <i class="fas fa-download mr-2"></i>Export
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Registrations Table -->
+        <div class="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 overflow-hidden">
+            <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-700">
+                <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-200">Vehicle Registrations</h3>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-slate-50 dark:bg-slate-700">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Owner</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Vehicle</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Photo</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Contact</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Address</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Status</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Registered</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="registrationsTable" class="bg-white dark:bg-slate-800 divide-y divide-slate-200 dark:divide-slate-700">
+                        <!-- Data will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 max-w-2xl w-full mx-4 shadow-2xl max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold text-slate-800 dark:text-slate-200">Edit Registration</h3>
+                <button id="closeEditModal" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <form id="editForm" class="space-y-4">
+                <input type="hidden" id="editId">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">First Name</label>
+                        <input type="text" id="editFirstName" class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Last Name</label>
+                        <input type="text" id="editLastName" class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Year</label>
+                        <input type="number" id="editCarYear" class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Make</label>
+                        <input type="text" id="editCarMake" class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Model</label>
+                        <input type="text" id="editCarModel" class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Color</label>
+                    <input type="text" id="editCarColor" class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Phone</label>
+                        <input type="tel" id="editPhoneNumber" class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Email</label>
+                        <input type="email" id="editEmail" class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Street Address</label>
+                    <input type="text" id="editStreet" class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">City</label>
+                        <input type="text" id="editCity" class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">State</label>
+                        <input type="text" id="editState" class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">ZIP</label>
+                        <input type="text" id="editZip" class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Status</label>
+                    <select id="editStatus" class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </div>
+                <div class="flex justify-end space-x-3 pt-4">
+                    <button type="button" id="cancelEdit" class="px-4 py-2 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+                        Cancel
+                    </button>
+                    <button type="submit" class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg transition-colors">
+                        Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl">
+            <div class="text-center">
+                <div class="w-16 h-16 bg-red-100 dark:bg-red-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-exclamation-triangle text-2xl text-red-600 dark:text-red-400"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-800 dark:text-slate-200 mb-2">Delete Registration</h3>
+                <p class="text-slate-600 dark:text-slate-400 mb-6">Are you sure you want to delete this vehicle registration? This action cannot be undone.</p>
+                <div class="flex justify-center space-x-3">
+                    <button id="cancelDelete" class="px-4 py-2 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+                        Cancel
+                    </button>
+                    <button id="confirmDelete" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-colors">
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 hidden">
+        <div class="max-w-4xl max-h-[90vh] w-full mx-4 relative">
+            <button id="closeImageModal" class="absolute top-4 right-4 z-10 bg-black bg-opacity-50 text-white rounded-full w-10 h-10 flex items-center justify-center hover:bg-opacity-75 transition-colors">
+                <i class="fas fa-times"></i>
+            </button>
+            <img id="modalImage" class="w-full h-full object-contain rounded-lg" alt="Vehicle Photo">
+        </div>
+    </div>
+
+    <!-- Firebase (modular SDK via ESM) -->
+    <script type="module">
+        // ----- Firebase Setup -----
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+        import {
+            getFirestore, collection, onSnapshot, doc, updateDoc, deleteDoc, query, orderBy, where
+        } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyD7Ts3Mu2VUR4Jd21MXkRpK5mMMuMbotLc",
+            authDomain: "parking-2c684.firebaseapp.com",
+            projectId: "parking-2c684",
+            storageBucket: "parking-2c684.firebasestorage.app",
+            messagingSenderId: "308988972943",
+            appId: "1:308988972943:web:0fd6ab3e3d760ec57bc5fa",
+            measurementId: "G-C0Y5E90LTV"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const parkingRef = collection(db, "parking_registrations");
+
+        // ----- Global Variables -----
+        let allRegistrations = [];
+        let filteredRegistrations = [];
+        let currentEditId = null;
+        let currentDeleteId = null;
+
+        // ----- Theme Toggle -----
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        html.classList.toggle('dark', currentTheme === 'dark');
+
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            const newTheme = html.classList.contains('dark') ? 'dark' : 'light';
+            localStorage.setItem('theme', newTheme);
+        });
+
+        // ----- Element References -----
+        const totalRegistrations = document.getElementById('totalRegistrations');
+        const totalVehicles = document.getElementById('totalVehicles');
+        const activeVehicles = document.getElementById('activeVehicles');
+        const todayRegistrations = document.getElementById('todayRegistrations');
+        const monthRegistrations = document.getElementById('monthRegistrations');
+        const searchInput = document.getElementById('searchInput');
+        const statusFilter = document.getElementById('statusFilter');
+        const refreshBtn = document.getElementById('refreshBtn');
+        const exportBtn = document.getElementById('exportBtn');
+        const registrationsTable = document.getElementById('registrationsTable');
+        const editModal = document.getElementById('editModal');
+        const deleteModal = document.getElementById('deleteModal');
+        const editForm = document.getElementById('editForm');
+        const closeEditModal = document.getElementById('closeEditModal');
+        const cancelEdit = document.getElementById('cancelEdit');
+        const cancelDelete = document.getElementById('cancelDelete');
+        const confirmDelete = document.getElementById('confirmDelete');
+
+        // ----- Data Loading -----
+        function loadRegistrations() {
+            const q = query(parkingRef, orderBy('timestamp', 'desc'));
+            
+            onSnapshot(q, (snapshot) => {
+                allRegistrations = [];
+                snapshot.forEach((doc) => {
+                    const data = doc.data();
+                    allRegistrations.push({
+                        id: doc.id,
+                        ...data,
+                        timestamp: data.timestamp?.toDate() || new Date()
+                    });
+                });
+                
+                updateStats();
+                applyFilters();
+            });
+        }
+
+        function updateStats() {
+            const total = allRegistrations.length;
+            const active = allRegistrations.filter(r => r.status === 'active').length;
+            
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const todayCount = allRegistrations.filter(r => {
+                const regDate = new Date(r.timestamp);
+                regDate.setHours(0, 0, 0, 0);
+                return regDate.getTime() === today.getTime();
+            }).length;
+            
+            const thisMonth = new Date();
+            const monthCount = allRegistrations.filter(r => {
+                const regDate = new Date(r.timestamp);
+                return regDate.getMonth() === thisMonth.getMonth() && 
+                       regDate.getFullYear() === thisMonth.getFullYear();
+            }).length;
+
+            totalRegistrations.textContent = total;
+            totalVehicles.textContent = total;
+            activeVehicles.textContent = active;
+            todayRegistrations.textContent = todayCount;
+            monthRegistrations.textContent = monthCount;
+        }
+
+        function applyFilters() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const statusFilterValue = statusFilter.value;
+
+            filteredRegistrations = allRegistrations.filter(reg => {
+                const matchesSearch = !searchTerm || 
+                    reg.firstName.toLowerCase().includes(searchTerm) ||
+                    reg.lastName.toLowerCase().includes(searchTerm) ||
+                    reg.carMake.toLowerCase().includes(searchTerm) ||
+                    reg.carModel.toLowerCase().includes(searchTerm) ||
+                    reg.carColor.toLowerCase().includes(searchTerm) ||
+                    reg.phoneNumber.includes(searchTerm);
+
+                const matchesStatus = !statusFilterValue || reg.status === statusFilterValue;
+
+                return matchesSearch && matchesStatus;
+            });
+
+            renderTable();
+        }
+
+        function renderTable() {
+            registrationsTable.innerHTML = '';
+
+            if (filteredRegistrations.length === 0) {
+                registrationsTable.innerHTML = `
+                    <tr>
+                        <td colspan="7" class="px-6 py-8 text-center text-slate-500 dark:text-slate-400">
+                            <i class="fas fa-search text-2xl mb-2"></i>
+                            <p>No registrations found</p>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            filteredRegistrations.forEach(reg => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors';
+                
+                const regDate = new Date(reg.timestamp);
+                const formattedDate = regDate.toLocaleDateString();
+                const formattedTime = regDate.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm font-medium text-slate-900 dark:text-slate-100">
+                            ${reg.firstName} ${reg.lastName}
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-slate-900 dark:text-slate-100">
+                            ${reg.carYear} ${reg.carMake} ${reg.carModel}
+                        </div>
+                        <div class="text-sm text-slate-500 dark:text-slate-400">
+                            ${reg.carColor}
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        ${reg.carPhotoUrl ? 
+                            `<img src="${reg.carPhotoUrl}" alt="Vehicle Photo" class="w-16 h-12 object-cover rounded-lg border border-slate-200 dark:border-slate-600 cursor-pointer" onclick="showImageModal('${reg.carPhotoUrl}')">` : 
+                            `<div class="w-16 h-12 bg-slate-100 dark:bg-slate-700 rounded-lg border border-slate-200 dark:border-slate-600 flex items-center justify-center">
+                                <i class="fas fa-car text-slate-400 dark:text-slate-500"></i>
+                            </div>`
+                        }
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-slate-900 dark:text-slate-100">
+                            ${reg.phoneNumber}
+                        </div>
+                        ${reg.email ? `<div class="text-sm text-slate-500 dark:text-slate-400">${reg.email}</div>` : ''}
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="text-sm text-slate-900 dark:text-slate-100">
+                            ${reg.address.street}
+                        </div>
+                        <div class="text-sm text-slate-500 dark:text-slate-400">
+                            ${reg.address.city}, ${reg.address.state} ${reg.address.zip}
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full ${reg.status === 'active' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'}">
+                            ${reg.status}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
+                        <div>${formattedDate}</div>
+                        <div>${formattedTime}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        <div class="flex space-x-2">
+                            <button onclick="editRegistration('${reg.id}')" class="text-primary-600 hover:text-primary-900 dark:text-primary-400 dark:hover:text-primary-300">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button onclick="deleteRegistration('${reg.id}')" class="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                
+                registrationsTable.appendChild(row);
+            });
+        }
+
+        // ----- Event Listeners -----
+        searchInput.addEventListener('input', applyFilters);
+        statusFilter.addEventListener('change', applyFilters);
+        refreshBtn.addEventListener('click', loadRegistrations);
+
+        exportBtn.addEventListener('click', () => {
+            // Simple CSV export
+            const csvContent = generateCSV(filteredRegistrations);
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `parking_registrations_${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            window.URL.revokeObjectURL(url);
+        });
+
+        // ----- Modal Functions -----
+        window.editRegistration = function(id) {
+            const reg = allRegistrations.find(r => r.id === id);
+            if (!reg) return;
+
+            currentEditId = id;
+            document.getElementById('editId').value = id;
+            document.getElementById('editFirstName').value = reg.firstName;
+            document.getElementById('editLastName').value = reg.lastName;
+            document.getElementById('editCarYear').value = reg.carYear;
+            document.getElementById('editCarMake').value = reg.carMake;
+            document.getElementById('editCarModel').value = reg.carModel;
+            document.getElementById('editCarColor').value = reg.carColor;
+            document.getElementById('editPhoneNumber').value = reg.phoneNumber;
+            document.getElementById('editEmail').value = reg.email || '';
+            document.getElementById('editStreet').value = reg.address.street;
+            document.getElementById('editCity').value = reg.address.city;
+            document.getElementById('editState').value = reg.address.state;
+            document.getElementById('editZip').value = reg.address.zip;
+            document.getElementById('editStatus').value = reg.status;
+
+            editModal.classList.remove('hidden');
+        };
+
+        window.deleteRegistration = function(id) {
+            currentDeleteId = id;
+            deleteModal.classList.remove('hidden');
+        };
+
+        closeEditModal.addEventListener('click', () => editModal.classList.add('hidden'));
+        cancelEdit.addEventListener('click', () => editModal.classList.add('hidden'));
+        cancelDelete.addEventListener('click', () => deleteModal.classList.add('hidden'));
+
+        editForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            try {
+                const docRef = doc(db, 'parking_registrations', currentEditId);
+                await updateDoc(docRef, {
+                    firstName: document.getElementById('editFirstName').value,
+                    lastName: document.getElementById('editLastName').value,
+                    carYear: parseInt(document.getElementById('editCarYear').value),
+                    carMake: document.getElementById('editCarMake').value,
+                    carModel: document.getElementById('editCarModel').value,
+                    carColor: document.getElementById('editCarColor').value,
+                    phoneNumber: document.getElementById('editPhoneNumber').value,
+                    email: document.getElementById('editEmail').value,
+                    address: {
+                        street: document.getElementById('editStreet').value,
+                        city: document.getElementById('editCity').value,
+                        state: document.getElementById('editState').value,
+                        zip: document.getElementById('editZip').value
+                    },
+                    status: document.getElementById('editStatus').value
+                });
+
+                editModal.classList.add('hidden');
+            } catch (error) {
+                console.error('Error updating registration:', error);
+                alert('Failed to update registration. Please try again.');
+            }
+        });
+
+        confirmDelete.addEventListener('click', async () => {
+            try {
+                await deleteDoc(doc(db, 'parking_registrations', currentDeleteId));
+                deleteModal.classList.add('hidden');
+            } catch (error) {
+                console.error('Error deleting registration:', error);
+                alert('Failed to delete registration. Please try again.');
+            }
+        });
+
+        // ----- Image Modal Functions -----
+        window.showImageModal = function(imageUrl) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            modalImage.src = imageUrl;
+            modal.classList.remove('hidden');
+        };
+
+        // Close image modal
+        document.getElementById('closeImageModal').addEventListener('click', () => {
+            document.getElementById('imageModal').classList.add('hidden');
+        });
+
+        // Close image modal when clicking outside
+        document.getElementById('imageModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('imageModal')) {
+                document.getElementById('imageModal').classList.add('hidden');
+            }
+        });
+
+        // ----- Utility Functions -----
+        function generateCSV(registrations) {
+            const headers = ['Name', 'Vehicle', 'Color', 'Phone', 'Email', 'Address', 'Status', 'Registered'];
+            const rows = registrations.map(reg => [
+                `"${reg.firstName} ${reg.lastName}"`,
+                `"${reg.carYear} ${reg.carMake} ${reg.carModel}"`,
+                `"${reg.carColor}"`,
+                `"${reg.phoneNumber}"`,
+                `"${reg.email || ''}"`,
+                `"${reg.address.street}, ${reg.address.city}, ${reg.address.state} ${reg.address.zip}"`,
+                `"${reg.status}"`,
+                `"${new Date(reg.timestamp).toLocaleString()}"`
+            ]);
+
+            return [headers.join(','), ...rows.map(row => row.join(','))].join('\n');
+        }
+
+        // ----- Keyboard Shortcuts -----
+        document.addEventListener('keydown', (e) => {
+            // Ctrl+Shift to go back to user portal
+            if (e.ctrlKey && e.shiftKey) {
+                e.preventDefault();
+                window.location.href = 'index.html';
+            }
+        });
+
+        // ----- Initialize -----
+        loadRegistrations();
+    </script>
+</body>
+</html>
